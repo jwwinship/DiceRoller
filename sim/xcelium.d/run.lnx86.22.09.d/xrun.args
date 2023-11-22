@@ -1,0 +1,13 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+../rtl/RNG.v
+../rtl/GARO.v
+RNGTB.v
+-access
++rwc
+-gui
+-linedebug
+-top
+RNGTB

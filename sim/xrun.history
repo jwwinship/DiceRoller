@@ -1,0 +1,11 @@
+s1(21Nov2023:22:38:16):  xrun ../rtl/RNG.v RNGTB.v -access +rwc -top RNGTB 
+s2(21Nov2023:22:39:10):  xrun ../rtl/RNG.v RNGTB.v -access +rwc -top RNGTB 
+s3(21Nov2023:22:39:44):  xrun ../rtl/RNG.v RNGTB.v -access +rwc -top RNGTB 
+s4(21Nov2023:22:40:14):  xrun ../rtl/RNG.v RNGTB.v -access +rwc -top RNGTB 
+s5(21Nov2023:22:40:58):  xrun ../rtl/RNG.v ../rtl/GARO.v RNGTB.v -access +rwc -top RNGTB 
+s6(21Nov2023:22:41:22):  xrun ../rtl/RNG.v ../rtl/GARO.v RNGTB.v -access +rwc -top RNGTB 
+s7(21Nov2023:22:44:22):  xrun ../rtl/RNG.v ../rtl/GARO.v RNGTB.v -access +rwc -top RNGTB 
+s8(21Nov2023:22:47:59):  xrun ../rtl/RNG.v ../rtl/GARO.v RNGTB.v -access +rwc -gui -linedebug -top RNGTB 
+s9(21Nov2023:22:48:13):  xrun ../rtl/RNG.v ../rtl/GARO.v RNGTB.v -access +rwc -gui -linedebug -top RNGTB 
+s10(21Nov2023:23:03:54):  xrun ../rtl/RNG.v ../rtl/GARO.v RNGTB.v -access +rwc -top RNGTB 
+s11(21Nov2023:23:04:08):  xrun ../rtl/RNG.v ../rtl/GARO.v RNGTB.v -access +rwc -gui -linedebug -top RNGTB 
