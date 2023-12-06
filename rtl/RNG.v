@@ -7,7 +7,7 @@ module RNG(input  wire clk,
 	      output wire done);
    
    wire stop;
-   assign stop = !start;
+   assign stop = start;
    
    GARO rng1(.stop(stop), .clk(clk), .reset_n(reset_n), .random(result));
    
