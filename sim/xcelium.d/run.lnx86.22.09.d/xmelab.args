@@ -6,7 +6,7 @@
 +rwc
 -no_analogsolver
 -MESSAGES
-RNGTB
+TB_SIPO
 -XLMODE
 ./xcelium.d/run.lnx86.22.09.d
 -RUNMODE

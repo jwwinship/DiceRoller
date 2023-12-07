@@ -7,7 +7,8 @@
 -RUNMODE
 ../rtl/RNG.v
 ../rtl/GARO.v
-RNGTB.v
+../rtl/SIPO.v
+TB_SIPO.v
 -LINEDEBUG
 -CDSLIB
 ./xcelium.d/run.lnx86.22.09.d/cdsrun.lib

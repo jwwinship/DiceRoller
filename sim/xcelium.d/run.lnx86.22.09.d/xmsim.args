@@ -3,11 +3,12 @@
 // Do not modify this file
 //
 -gui
+-TCL
 -MESSAGES
 +EMGRLOG
 xrun.log
 -XLSTIME
-1700625848
+1701896641
 -XLKEEP
 -XLMODE
 ./xcelium.d/run.lnx86.22.09.d
