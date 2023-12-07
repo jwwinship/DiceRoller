@@ -20,17 +20,17 @@ module RNGTB;
 	
 	     
 		clk = 0;
-		start = 0;
+		start = 1;
 			
 		reset = 0;
 		@(posedge clk);
 		reset = 1;
 		
 		repeat(1000) begin
-			start = 1;
+			start = 0;
 			@(posedge clk)
 			$display("Output bit: %b", result);
-			start = 0;
+			start = 1;
 		
 		end
 		$finish;

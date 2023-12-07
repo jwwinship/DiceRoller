@@ -4,4 +4,5 @@
 //
 /home/jwwinship/Resources/DiceRoller/rtl/RNG.v
 /home/jwwinship/Resources/DiceRoller/rtl/GARO.v
-/home/jwwinship/Resources/DiceRoller/sim/RNGTB.v
+/home/jwwinship/Resources/DiceRoller/rtl/SIPO.v
+/home/jwwinship/Resources/DiceRoller/sim/TB_SIPO.v

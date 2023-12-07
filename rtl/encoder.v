@@ -9,17 +9,17 @@ output dieSelect
 
 
 reg [6:0] comboButton;
-reg [2:0] dieSelect;
 
-assign combobutton = {buttonD4 + buttonD8 + buttonD10 + buttonD12 + buttonD20 + switchTest};
+
+wire [2:0] dieSelect; //TODO: needs to be one more bit to accomodate non-input state. 
+
+assign combobutton = {buttonD4, buttonD6, buttonD8,buttonD10,buttonD12,buttonD20,switchTest};
 
 
 
 
 always @ (comboButton) begin
-
 	case (combobutton) begin
-
 
 	7'b1000000: dieSelect = 3'b000;
 	7'b0100000: dieSelect = 3'b001;
@@ -27,6 +27,7 @@ always @ (comboButton) begin
 	7'b0001000: dieSelect = 3'b011;
 	7'b0000100: dieSelect = 3'b100;
 	7'b0000010: dieSelect = 3'b101;
+	//Default cases, reset cases
 	7'b0000001: dieSelect = 3'b111;
 	default: dieSelect = 3'b111;
 
