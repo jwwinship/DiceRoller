@@ -1,14 +1,14 @@
 module postProcess(
 
-input [3:0] i_dieSelect,
-input [6:0] i_randomData,
-input i_clk,
-input i_reset_n,
-input  i_uart,
-input i_valid, //Indicates valid random number input 
-output reg o_stop,
-output [4:0] o_dieRoll,
-output reg o_tx //Serial output 
+input wire [3:0] i_dieSelect,
+input wire [6:0] i_randomData,
+input wire i_clk,
+input wire i_reset_n,
+input wire  i_uart,
+input wire i_valid, //Indicates valid random number input 
+output wire o_stop,
+output wire [4:0] o_dieRoll,
+output wire o_tx //Serial output 
 
 );
 
@@ -35,8 +35,14 @@ always @(posedge i_clk) begin
 	begin	
 		r_dieRoll <= 0;
 		r_dieSelect <= 4'b1111; //Reset die select
-		r_randomData <= 0;
+		r_stop <= 1; //Initialize r_stop
+		r_transmitDone <= 0;
+		r_tx <= 0;
+		//r_randomData <= 0;
+		r_current_state <= s_resetRNG;
 	end
+	r_current_state <= r_next_state; //Set current State
+	
 	
 	case(r_current_state)
 		s_resetRNG: begin
@@ -161,6 +167,8 @@ end
 */
 
 assign o_dieRoll = r_dieRoll; //Assign output
+assign o_stop = r_stop;
+assign o_tx = r_tx;
 //assign r_dieSelect = i_dieSelect; //Assign input to register
 
 endmodule

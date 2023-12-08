@@ -1,0 +1,5 @@
+Randomly Generated Number:  64	|	Dice Selection: 0101	|	Random Roll: 19
+Randomly Generated Number:   0	|	Dice Selection: 0101	|	Random Roll: 14
+Randomly Generated Number:  64	|	Dice Selection: 0101	|	Random Roll:  2
+Randomly Generated Number:   0	|	Dice Selection: 0101	|	Random Roll:  2
+Randomly Generated Number:  64	|	Dice Selection: 0101	|	Random Roll:  1
