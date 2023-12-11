@@ -6,7 +6,7 @@ module TB_POSTPROCESS;
 
 		reg clk;
 		reg reset_n;
-		reg i_data_in;
+		wire i_data_in;
 		
 		reg[31:0] f;
 	
@@ -22,6 +22,7 @@ module TB_POSTPROCESS;
 		wire [4:0] r_rollResult;
 		wire w_tx;
 		
+		GARO DUT_GARO(.clk(clk, .reset_n(reset_n), .stop(r_stop), .random(i_data_in));
 		SIPO DUT_SIPO(.clk(clk), .reset_n(reset_n), .i_data_in(i_data_in), .i_start(!r_stop), .o_data_out(w_random), .o_valid(r_randomValid));
 		postProcess DUT_PP(.i_dieSelect(r_dieSelect),
 							.i_randomData(w_random),
@@ -74,6 +75,6 @@ module TB_POSTPROCESS;
 		
 		always begin
 			#5 clk = ~clk;
-			i_data_in = $random%2;
+			//i_data_in = $random%2;
 		end
 endmodule 
