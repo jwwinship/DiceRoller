@@ -7,12 +7,12 @@
 
 module SIPO #(parameter cycles_per_bit = 0) 
 	(
-		input clk,
-		input reset_n,
-		input i_data_in, 
-		input i_start,
-		output [6:0] o_data_out,
-		output o_valid
+		input wire clk,
+		input wire reset_n,
+		input wire i_data_in, 
+		input wire i_start,
+		output wire[6:0] o_data_out,
+		output wire o_valid
 	);
 	
 	reg [6:0] r_data_temp;
