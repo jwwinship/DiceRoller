@@ -1,0 +1,64 @@
+xrun: 22.09-s011: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun	22.09-s011: Started on Dec 11, 2023 at 17:48:36 EST
+xrun
+	../rtl/RNG.v
+	../rtl/GARO.v
+	../rtl/SIPO.v
+	../rtl/postProcess.v
+	../rtl/RNG_NIOS_INSTR.v
+	TB_POSTPROCESS.v
+	-access +rwc
+	-gui
+	-linedebug
+	-top TB_POSTPROCESS
+	-s
+xrun: *W,BADPRF: The -linedebug option may have an adverse performance impact.
+Recompiling... reason: file './TB_POSTPROCESS.v' is newer than expected.
+	expected: Mon Dec 11 17:44:22 2023
+	actual:   Mon Dec 11 17:48:33 2023
+file: TB_POSTPROCESS.v
+	module worklib.TB_POSTPROCESS:v
+		errors: 0, warnings: 0
+	Elaborating the design hierarchy:
+		Caching library 'worklib' ....... Done
+	Top level design units:
+		TB_POSTPROCESS
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.TB_POSTPROCESS:v <0x4ee8d32b>
+			streams:   9, words:  8276
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                 Instances  Unique
+		Modules:                 5       5
+		Registers:              23      23
+		Scalar wires:           16       -
+		Vectored wires:         10       -
+		Always blocks:           6       6
+		Initial blocks:          2       2
+		Cont. assignments:       8      10
+		Pseudo assignments:      8       8
+		Simulation timescale:  1ps
+	Writing initial simulation snapshot: worklib.TB_POSTPROCESS:v
+xmsim: *W,NOMTDGUI: Multi-Threaded Dumping is disabled for interactive debug mode.
+xcelium> 
+xcelium> source /opt/cadence/XCELIUM2209/tools/xcelium/files/xmsimrc
+xcelium> 
+-------------------------------------
+Relinquished control to SimVision...
+# Restoring simulation environment...
+xcelium> input -quiet .reinvoke.sim
+xcelium> file delete .reinvoke.sim
+xcelium> run
+Simulation complete via $finish(1) at time 65425 NS + 0
+./TB_POSTPROCESS.v:88 			$finish;
+xcelium> probe -create -shm TB_POSTPROCESS.RNG_DUT.DUT_GARO.bitCount TB_POSTPROCESS.RNG_DUT.DUT_GARO.clk TB_POSTPROCESS.RNG_DUT.DUT_GARO.meta1 TB_POSTPROCESS.RNG_DUT.DUT_GARO.meta2 TB_POSTPROCESS.RNG_DUT.DUT_GARO.random TB_POSTPROCESS.RNG_DUT.DUT_GARO.reset_n TB_POSTPROCESS.RNG_DUT.DUT_GARO.stage TB_POSTPROCESS.RNG_DUT.DUT_GARO.stop
+Created probe 3
+xcelium> ...Regained control from SimVision
+-------------------------------------
+
+xcelium> 
+xmsim: *W,CMUSEX: Control-D in interactive input - one more to exit.
+xcelium> exit
+TOOL:	xrun	22.09-s011: Exiting on Dec 12, 2023 at 03:33:23 EST  (total: 09:44:47)

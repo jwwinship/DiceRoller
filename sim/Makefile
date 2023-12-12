@@ -36,6 +36,7 @@ simint:
 		../rtl/GARO.v \
 		../rtl/SIPO.v \
 		../rtl/postProcess.v \
+		../rtl/RNG_NIOS_INSTR.v \
 	    TB_POSTPROCESS.v \
 	-access +rwc \
 	-gui \

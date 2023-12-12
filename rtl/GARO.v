@@ -1,6 +1,7 @@
 /*This module attempts to implement a Galois Ring Oscillator for TRNG. 
 	taps are located at bits 31,27,23,21,20,17,16,15,13,10,9,8,6,5,4,3,and 1 for maximal LFSR length
 */
+`timescale 1ns/1ps
 
 module GARO (input stop,clk, reset_n, 
 			 output random);
@@ -10,7 +11,7 @@ wire [31:1] stage /* synthesis keep */; //stop *altera* tools optimizing this aw
 reg meta1, meta2;
 reg [2:0] bitCount;
 
-//assign random = meta2;
+assign random = meta2;
 
 always@(posedge clk or negedge reset_n)
 if(!reset_n)
@@ -25,16 +26,26 @@ else if(clk)
 	if (!stop) begin
 		if (bitCount < 7)
 		begin
-			random <= (bitCount % 2 == 0); //Modeled data 
+			meta2 <= 1; //Modeled data 
+			bitCount <= bitCount + 1;
+		end
+		
+		else if (bitCount == 7) begin
+			meta2 <= 0;
 			bitCount <= bitCount + 1;
 		end
 		
 		else
 		begin
-			random <= 0;
+			meta2 <= 0;
 			bitCount <= 0;
 		end
 	end
+	
+	else if (stop) begin
+		meta2 <= meta2;
+		
+	end 
     //meta1 <= stage[1];
     //meta2 <= meta1;
   end

@@ -8,13 +8,13 @@ module RNG_NIOS_INSTR ( clk, clk_en, reset, start, dataa, datab, result, done);
 	output [31:0] result;
 	output done;
 	
-	reg clk;
-	reg reset_n;
-	reg i_data_in;
+	//reg clk;
+	wire reset_n;
+	wire i_data_in;
 	
-	reg[31:0] f;
+	wire[31:0] f;
 	
-	reg [3:0]r_dieSelect;
+	wire [3:0]r_dieSelect;
 	
 	wire r_stop;
 	wire [6:0] w_random;
@@ -22,6 +22,11 @@ module RNG_NIOS_INSTR ( clk, clk_en, reset, start, dataa, datab, result, done);
 	wire [4:0] r_rollResult;
 	wire w_tx;
 	
+	assign done = r_randomValid;
+	assign reset_n = !reset; //Negate reset
+	assign r_dieSelect = dataa[3:0]; //Die Selection is first 4 bits of input dataa
+	
+	GARO DUT_GARO(.clk(clk), .reset_n(reset_n), .stop(r_stop), .random(i_data_in));
 	SIPO DUT_SIPO(.clk(clk), .reset_n(reset_n), .i_data_in(i_data_in), .i_start(!r_stop), .o_data_out(w_random), .o_valid(r_randomValid));
 	postProcess DUT_PP(.i_dieSelect(r_dieSelect),
 						.i_randomData(w_random),
@@ -32,3 +37,6 @@ module RNG_NIOS_INSTR ( clk, clk_en, reset, start, dataa, datab, result, done);
 						.o_stop(r_stop),
 						.o_dieRoll(r_rollResult),
 						.o_tx(w_tx)); //Serial output
+						
+	assign result = {27'b0, r_rollResult[4:0]};
+endmodule

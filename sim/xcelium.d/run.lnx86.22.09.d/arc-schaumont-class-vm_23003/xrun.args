@@ -1,0 +1,15 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+../rtl/RNG.v
+../rtl/GARO.v
+../rtl/SIPO.v
+../rtl/postProcess.v
+TB_POSTPROCESS.v
+-access
++rwc
+-gui
+-linedebug
+-top
+TB_POSTPROCESS
