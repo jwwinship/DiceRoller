@@ -8,9 +8,9 @@ module debounceTB;
  // Outputs
  wire pb_out;
  // Instantiate the debouncing Verilog code
- debounce_better_version uut (
-  .pb_1(pb_1), 
-  .clk(clk), 
+ debounce uut (
+  .pb(pb_1), 
+  .clk_in(clk), 
   .pb_out(pb_out)
  );
  initial begin
@@ -29,25 +29,25 @@ module debounceTB;
   pb_1 = 0;
   #100;
   pb_1=1;
-  #40;
+  #20000000;
   pb_1 = 0;
-  #10;
+  #20000000;
   pb_1=1;
-  #30; 
+  #20000000; 
   pb_1 = 0;
-  #10;
+  #20000000;
   pb_1=1; 
-  #1000; 
+  #20000000; 
   pb_1 = 0;
-  #10;
+  #20000000;
   pb_1=1;
-  #20;
+  #20000000;
   pb_1 = 0;
   #10;
   pb_1=1;
   #30; 
   pb_1 = 0;
-  #10;
+  #20000000;
   pb_1=1;
   #40;
   pb_1 = 0; 

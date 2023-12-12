@@ -1,38 +1,25 @@
+`timescale 1ns/1ps
 module encoder(
-
-input buttonD4, buttonD6, buttonD8, buttonD10, buttonD12, buttonD20, switchTest,
-
-output dieSelect
-
+    input buttonD4, buttonD6, buttonD8, buttonD10, buttonD12, buttonD20, switchTest,
+    output reg [3:0] dieSelect
 );
 
-
-
 reg [6:0] comboButton;
+reg [3:0] r_dieSelect;
 
-
-wire [2:0] dieSelect; //TODO: needs to be one more bit to accomodate non-input state. 
-
-assign combobutton = {buttonD4, buttonD6, buttonD8,buttonD10,buttonD12,buttonD20,switchTest};
-
-
-
-
-always @ (comboButton) begin
-	case (combobutton) begin
-
-	7'b1000000: dieSelect = 3'b000;
-	7'b0100000: dieSelect = 3'b001;
-	7'b0010000: dieSelect = 3'b010;
-	7'b0001000: dieSelect = 3'b011;
-	7'b0000100: dieSelect = 3'b100;
-	7'b0000010: dieSelect = 3'b101;
-	//Default cases, reset cases
-	7'b0000001: dieSelect = 3'b111;
-	default: dieSelect = 3'b111;
-
-	endcase
-
-	end
-
+always @ (*) begin
+    comboButton = {buttonD4, buttonD6, buttonD8, buttonD10, buttonD12, buttonD20, switchTest};
+    case (comboButton)
+        7'b1000000: r_dieSelect = 4'b0000; //D4
+        7'b0100000: r_dieSelect = 4'b0001; //D6
+        7'b0010000: r_dieSelect = 4'b0010; //D8
+        7'b0001000: r_dieSelect = 4'b0011; //D10
+        7'b0000100: r_dieSelect = 4'b0100; //D12
+        7'b0000010: r_dieSelect = 4'b0101; //D20
+        7'b0000001: r_dieSelect = 4'b0111; //Test
+        default: r_dieSelect = 4'b1111; //nothing
+    endcase
+    dieSelect <= r_dieSelect;
 end
+
+endmodule
