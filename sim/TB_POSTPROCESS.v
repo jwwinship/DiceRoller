@@ -57,7 +57,7 @@ module TB_POSTPROCESS;
 				//$fwrite(f, "Randomly Generated Number: %d	|	Dice Selection: %b	|	Random Roll: %d\n", w_random, r_dieSelect, r_rollResult);
 				$fwrite(f, "%d\n", result);
 				dataa = 32'h000F;
-				#1000;
+				#100;
 				
 		
 			end 

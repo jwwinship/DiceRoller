@@ -54,11 +54,11 @@ diceTop unit_diceTop(
 			$display("D4 Press");
 
 			buttonD4 = 0;
-			buttonD6 = 1;
+			buttonD6 = 0;
 			buttonD8 = 0;
 			buttonD10 = 0;
 			buttonD12 = 0;
-			buttonD20 = 0;
+			buttonD20 = 1;
 			switchTest = 0;
 
 

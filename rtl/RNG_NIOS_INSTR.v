@@ -10,7 +10,7 @@ module RNG_NIOS_INSTR ( clk, clk_en, reset, start, dataa, datab, result, done);
 	
 	//reg clk;
 	wire reset_n;
-	wire i_data_in;
+	wire w_data_in;
 	
 	wire[31:0] f;
 	
@@ -26,8 +26,8 @@ module RNG_NIOS_INSTR ( clk, clk_en, reset, start, dataa, datab, result, done);
 	assign reset_n = !reset; //Negate reset
 	assign r_dieSelect = dataa[3:0]; //Die Selection is first 4 bits of input dataa
 	
-	GARO DUT_GARO(.clk(clk), .reset_n(reset_n), .stop(r_stop), .random(i_data_in));
-	SIPO DUT_SIPO(.clk(clk), .reset_n(reset_n), .i_data_in(i_data_in), .i_start(!r_stop), .o_data_out(w_random), .o_valid(r_randomValid));
+	lfsr DUT_LFSR(.clk(clk), .reset_n(reset_n),.Q(w_data_in));
+	SIPO DUT_SIPO(.clk(clk), .reset_n(reset_n), .i_data_in(w_data_in), .i_start(!r_stop), .o_data_out(w_random), .o_valid(r_randomValid));
 	postProcess DUT_PP(.i_dieSelect(r_dieSelect),
 						.i_randomData(w_random),
 						.i_clk(clk),
