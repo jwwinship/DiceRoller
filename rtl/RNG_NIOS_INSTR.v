@@ -38,5 +38,5 @@ module RNG_NIOS_INSTR ( clk, clk_en, reset, start, dataa, datab, result, done);
 						.o_dieRoll(r_rollResult),
 						.o_tx(w_tx)); //Serial output
 						
-	assign result = {27'b0, r_rollResult[4:0]};
+	assign result = (done) ? {27'b0, r_rollResult[4:0]} : result;
 endmodule

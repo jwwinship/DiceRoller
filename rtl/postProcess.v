@@ -47,9 +47,14 @@ always @(posedge i_clk) begin
 	case(r_current_state)
 		s_resetRNG: begin
 			
-			 if (!i_valid) begin // if no valid number, deassert stop several times until a valid signal is given
+			if (!i_valid) begin // if no valid number, deassert stop several times until a valid signal is given
+				if (r_stop) begin
 					r_stop <= 1'b0; 
-	
+				end 
+				
+				else if (!r_stop) begin //if TRNG is running, capture bit and reset. TODO, make sure clock delay is accounted for, and we're not just resetting captured bit.
+					r_stop <= 1'b1; 
+				end
 			end
 			
 			else if (i_valid) begin
@@ -69,12 +74,45 @@ always @(posedge i_clk) begin
 		s_CALC: begin
 			
 			case (r_dieSelect)
-				4'b0000: r_dieRoll <= r_randomData[6:0] % 4;
-				4'b0001: r_dieRoll <= r_randomData[6:0] % 6;
-				4'b0010: r_dieRoll <= r_randomData[6:0] % 8;
-				4'b0011: r_dieRoll <= r_randomData[6:0] % 10;
-				4'b0100: r_dieRoll <= r_randomData[6:0] % 12;
-				4'b0101: r_dieRoll <= r_randomData[6:0] % 20;
+				//4'b0000: begin r_dieRoll <= r_randomData[6:0] % 4;
+				//4'b0001: r_dieRoll <= r_randomData[6:0] % 6;
+				//4'b0010: r_dieRoll <= r_randomData[6:0] % 8;
+				//4'b0011: r_dieRoll <= r_randomData[6:0] % 10;
+				//4'b0100: r_dieRoll <= r_randomData[6:0] % 12;
+				//4'b0101: r_dieRoll <= r_randomData[6:0] % 20;
+				
+				
+				
+				
+				4'b0000: begin 
+					r_dieRoll <= r_randomData[6:0] % 4;
+					//if (r_dieRoll == 0) r_dieRoll <= 4;
+				end
+				
+				4'b0001: begin 
+					r_dieRoll <= r_randomData[6:0] % 6;
+					//if (r_dieRoll == 0) r_dieRoll <= 6;
+				end
+				
+				4'b0010: begin 
+					r_dieRoll <= r_randomData[6:0] % 8;
+					//if (r_dieRoll == 0) r_dieRoll <= 8;
+				end
+				
+				4'b0011: begin 
+					r_dieRoll <= r_randomData[6:0] % 10;
+					//if (r_dieRoll == 0) r_dieRoll <= 10;
+				end
+				
+				4'b0100: begin 
+					r_dieRoll <= r_randomData[6:0] % 12;
+					//if (r_dieRoll == 0) r_dieRoll <= 12;
+				end
+				
+				4'b0101: begin 
+					r_dieRoll <= r_randomData[6:0] % 20;
+					//if (r_dieRoll == 0) r_dieRoll <= 20;
+				end
 				default: r_dieRoll <= 0; //Default case, no roll. 
 			endcase
 		end

@@ -50,13 +50,14 @@ module TB_POSTPROCESS;
 			
 
 			
-			repeat(1000) begin
+			repeat(10000) begin
 				#100; //Wait 50 clocks for some reason, to ensure that random number is available
 				dataa = 32'h0005; //Roll D20
-				@(done); //Wait for random Roll
+				@(result); //Wait for random Roll
 				//$fwrite(f, "Randomly Generated Number: %d	|	Dice Selection: %b	|	Random Roll: %d\n", w_random, r_dieSelect, r_rollResult);
-				$fwrite(f, "%d\n", result);
-				dataa = 32'h000F;
+				//if (result != 0)
+					$fwrite(f, "%d\n", result);
+				//dataa = 32'h000F;
 				#100;
 				
 		

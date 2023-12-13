@@ -1,174 +1,29 @@
-`timescale 1ns/1ps
-module diceTop (
+`timescale 1 ps / 1 ps
+module top(
+        //Reset and Clocks
+        input CLOCK_50,    //2.5v
+        input CPU_RESETn,  //3.3-v LVCMOS
+        input [3:0] KEY,   //1.5v; the pushbuttons
+        input [9:0] SW,    //For the switch	
+		  
+        output [9:0] LEDR, //1.5v
+        output [6:0] HEX0,HEX1,HEX2,HEX3,HEX4,HEX5  //For the 7seg displays
+); 
 
-//input 
-input buttonD4, 
-input buttonD6, 
-input buttonD8, 
-input buttonD10, 
-input buttonD12, 
-input buttonD20, 
-input switchTest,
-input clk,
-input reset_n
-//finish intput and output list
+//Instantiate Qsys based Nios system
+//Software LED assignment
+
+architectureV1 u0 (
+.clk_clk (CLOCK_50), //clk.clk
+.led_external_connection_export    (LEDR[9:0]),  //led_external_connection.export
+.reset_reset_n                     (CPU_RESETn), //reset.reset_n
+.button_external_connection_export (KEY[3:0]),   //button_external_connection.export
+.switch_external_connection_export (SW[9:0]),    //switch_external_connection.export
+.hex0_external_connection_export   (HEX0),       //hex0_external_connection.export
+.hex1_external_connection_export   (HEX1),       //hex1_external_connection.export
+.hex2_external_connection_export   (HEX2),       //hex2_external_connection.export
+.hex3_external_connection_export   (HEX3),       //hex3_external_connection.export
+.hex4_external_connection_export   (HEX4),       //hex4_external_connection.export
+.hex5_external_connection_export   (HEX5)        //hex5_external_connection.export
 );
-wire clk;
-wire postBounce_Button4;
-wire postBounce_Button6;
-wire postBounce_Button8;
-wire postBounce_Button10;
-wire postBounce_Button12;
-wire postBounce_Button20;
-wire postBounce_switchTest;
-wire [2:0] w_dieSelect;
-//pre proccess random bits from lfsr
-wire randomBits;
-//post process values
-wire [6:0] randomVals;
-//goes nowhere right now
-wire i_uart;
-wire i_valid;
-wire o_stop;
-wire [4:0] o_dieRoll;
-wire o_tx;
-
-
-
-//button processing
-encoder unit_encoder(
-
-//input 
-.buttonD4(postBounce_Button4), 
-.buttonD6(postBounce_Button6), 
-.buttonD8(postBounce_Button8), 
-.buttonD10(postBounce_Button10), 
-.buttonD12(postBounce_Button12), 
-.buttonD20(postBounce_Button20), 
-.switchTest(postBounce_switchTest),
-//output 
-.dieSelect(w_dieSelect)
-);
-
-debounce unit_buttonD4_debounce(
-
-	//input 
-	.pb(buttonD4),
-	.clk_in(clk),
-	//output 
-	.pb_out(postBounce_Button4)
-);
-
-debounce unit_buttonD6_debounce(
-
-	//input 
-	.pb(buttonD6),
-	.clk_in(clk),
-	//output 
-	.pb_out(postBounce_Button6)
-);
-
-
-debounce unit_buttonD8_debounce(
-
-	//input 
-	.pb(buttonD8),
-	.clk_in(clk),
-	//output 
-	.pb_out(postBounce_Button8)
-);
-
-
-debounce unit_buttonD10_debounce(
-
-	//input 
-	.pb(buttonD10),
-	.clk_in(clk),
-	//output 
-	.pb_out(postBounce_Button10)
-);
-
-
-debounce unit_buttonD12_debounce(
-
-	//input 
-	.pb(buttonD12),
-	.clk_in(clk),
-	//output 
-	.pb_out(postBounce_Button12)
-);
-
-debounce unit_buttonD20_debounce(
-
-	//input 
-	.pb(buttonD20),
-	.clk_in(clk),
-	//output 
-	.pb_out(postBounce_Button20)
-);
-
-
-debounce unit_switch_debounce(
-
-	//input 
-	.pb(switchTest),
-	.clk_in(clk),
-	//output 
-	.pb_out(postBounce_switchTest)
-);
-
-
-
-postProcess unit_postProcess(
-
-//input wire [3:0] 
-.i_dieSelect(w_dieSelect),
-//input wire [6:0] 
-.i_randomData(randomVals),
-//input wire 
-.i_clk(clk),
-//input wire 
-.i_reset_n(reset_n),
-//input wire  
-.i_uart(i_uart),
-//input wire 
-.i_valid(i_valid), //Indicates valid random number input 
-//output wire 
-.o_stop(o_stop),
-//output wire [4:0] 
-.o_dieRoll(o_dieRoll),
-//output wire 
-.o_tx(o_tx) //Serial output 
-
-);
-
-
-SIPO unit_sipo(
-		//input wire 
-		.clk(clk),
-		//input wire 
-		.reset_n(reset_n),
-		//input wire 
-		.i_data_in(randomBits), 
-		//input wire 
-		.i_start(!o_stop),
-		//output wire[6:0] 
-		.o_data_out(randomVals),
-		//output wire 
-		.o_valid(i_valid)
-	);
-	
- lfsr unit_lfsr(
-	//input 
-	.clk(clk),    
-	//input 
-	.reset_n(reset_n),
-	//output 
-	.Q(randomBits)//20,17
-
-);
-
-
-endmodule 
-
-
+endmodule
