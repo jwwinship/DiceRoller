@@ -80,8 +80,9 @@ simsipo:
 simint:
 	xrun \
 		../rtl/RNG.v \
-		../rtl/GARO.v \
+		../rtl/lfsr.v \
 		../rtl/SIPO.v \
+		../rtl/GARO.v \
 		../rtl/postProcess.v \
 		../rtl/RNG_NIOS_INSTR.v \
 		TB_POSTPROCESS.v \
