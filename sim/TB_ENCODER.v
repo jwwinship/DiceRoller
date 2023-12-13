@@ -15,6 +15,7 @@ reg button4;
 reg button5;
 reg button6;
 reg button7;
+wire [3:0] result;
 
 
 encoder u_encooder(
@@ -44,7 +45,7 @@ button4 = 0;
 button5 = 0;
 button6 = 0;
 button7 = 0;
-
+@(posedge clk)
 $display("Expected 0000, Actual: %b", result);
 
 
@@ -58,7 +59,8 @@ button4 = 0;
 button5 = 0;
 button6 = 0;
 button7 = 0;
-$display("Expected b0001, Actual: %h", result);
+@(posedge clk)
+$display("Expected b0001, Actual: %b", result);
 
 #10;
 
@@ -70,7 +72,8 @@ button4 = 0;
 button5 = 0;
 button6 = 0;
 button7 = 0;
-$display("Expected b0010, Actual: %h", result);
+@(posedge clk)
+$display("Expected b0010, Actual: %b", result);
 
 #10;
 
@@ -82,6 +85,7 @@ button4 = 1;
 button5 = 0;
 button6 = 0;
 button7 = 0;
+@(posedge clk)
 $display("Expected b0011, Actual: %b", result);
 
 #10;
@@ -95,6 +99,7 @@ button4 = 0;
 button5 = 1;
 button6 = 0;
 button7 = 0;
+@(posedge clk)
 $display("Expected b0100, Actual: %b", result);
 
 #10;
@@ -107,6 +112,7 @@ button4 = 0;
 button5 = 0;
 button6 = 1;
 button7 = 0;
+@(posedge clk)
 $display("Expected b0101, Actual: %b", result);
 
 #10;
@@ -121,6 +127,7 @@ button4 = 0;
 button5 = 0;
 button6 = 0;
 button7 = 1;
+@(posedge clk)
 $display("Expected b0111, Actual: %b", result);
 
 #10;
@@ -133,6 +140,7 @@ button4 = 0;
 button5 = 0;
 button6 = 0;
 button7 = 0;
+@(posedge clk)
 $display("Expected b1111, Actual: %b", result);
 
 #10;
@@ -145,6 +153,7 @@ button4 = 1;
 button5 = 0;
 button6 = 1;
 button7 = 0;
+@(posedge clk)
 $display("Expected b1111, Actual: %b", result);
 
 #10;

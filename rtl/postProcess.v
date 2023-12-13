@@ -47,14 +47,9 @@ always @(posedge i_clk) begin
 	case(r_current_state)
 		s_resetRNG: begin
 			
-			if (!i_valid) begin // if no valid number, deassert stop several times until a valid signal is given
-				if (r_stop) begin
+			 if (!i_valid) begin // if no valid number, deassert stop several times until a valid signal is given
 					r_stop <= 1'b0; 
-				end 
-				
-				else if (!r_stop) begin //if TRNG is running, capture bit and reset. TODO, make sure clock delay is accounted for, and we're not just resetting captured bit.
-					r_stop <= 1'b1; 
-				end
+	
 			end
 			
 			else if (i_valid) begin

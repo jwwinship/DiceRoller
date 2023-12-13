@@ -1,3 +1,5 @@
+//code courtesy of ECE 2029 labs
+
 `timescale 1ns / 1ps
 module debounce(
 input pb,clk_in,
@@ -12,13 +14,9 @@ dff d0(clk_in,slow_clk,pb,Q0);
 dff d1(clk_in,slow_clk,Q0,Q1);
 dff d2(clk_in,slow_clk,Q1,Q2);
 
-
-
 assign Q2_bar = ~Q2;
 assign pb_out = Q1 & Q2_bar;
 endmodule
-
-
 
 
 module clk_div(

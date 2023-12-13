@@ -103,12 +103,31 @@ simgui_top:
 	xrun \
 		../rtl/debounce.v \
 		../rtl/encoder.v \
-		../rtl/top.v \
+    ../rtl/lfsr.v \
+    ../rtl/SIPO.v \
+    ../rtl/postProcess.v \
+		../rtl/diceTop.v \
 		../sim/topTB.v \
 		-access +rwc \
 		-gui \
 		-linedebug \
-		-top topTB   
+		-top topTB
+
+sim_lfsr:
+	xrun \
+		../rtl/lfsr.v \
+		TB_LFSR.v \
+		-access +rwc \
+		-top TB_LFSR
+   
+simgui_lfsr:
+	xrun \
+		../rtl/lfsr.v \
+		TB_LFSR.v \
+		-access +rwc \
+		-gui \
+		-linedebug \
+		-top TB_LFSR   
 
 clean:
 	rm -rf trace.vcd  xcelium.d  xrun.history  xrun.log xrun.key *~ waves.shm

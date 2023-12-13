@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-module top (
+module diceTop (
 
 //input 
 input buttonD4, 
@@ -22,6 +22,16 @@ wire postBounce_Button12;
 wire postBounce_Button20;
 wire postBounce_switchTest;
 wire [2:0] w_dieSelect;
+//pre proccess random bits from lfsr
+wire randomBits;
+//post process values
+wire [6:0] randomVals;
+//goes nowhere right now
+wire i_uart;
+wire i_valid;
+wire o_stop;
+wire [4:0] o_dieRoll;
+wire o_tx;
 
 
 
@@ -109,30 +119,54 @@ debounce unit_switch_debounce(
 
 
 
+postProcess unit_postProcess(
+
+//input wire [3:0] 
+.i_dieSelect(w_dieSelect),
+//input wire [6:0] 
+.i_randomData(randomVals),
+//input wire 
+.i_clk(clk),
+//input wire 
+.i_reset_n(reset_n),
+//input wire  
+.i_uart(i_uart),
+//input wire 
+.i_valid(i_valid), //Indicates valid random number input 
+//output wire 
+.o_stop(o_stop),
+//output wire [4:0] 
+.o_dieRoll(o_dieRoll),
+//output wire 
+.o_tx(o_tx) //Serial output 
+
+);
 
 
+SIPO unit_sipo(
+		//input wire 
+		.clk(clk),
+		//input wire 
+		.reset_n(reset_n),
+		//input wire 
+		.i_data_in(randomBits), 
+		//input wire 
+		.i_start(!o_stop),
+		//output wire[6:0] 
+		.o_data_out(randomVals),
+		//output wire 
+		.o_valid(i_valid)
+	);
+	
+ lfsr unit_lfsr(
+	//input 
+	.clk(clk),    
+	//input 
+	.reset_n(reset_n),
+	//output 
+	.Q(randomBits)//20,17
 
-
-//some module to write to the screen
-//screenControl unit_screenControl();
-
-
-// enabled when synthesized for board 
-/*
-GARO unit_GARO(); 
-
-*/
-
-
-//serialToParallel
-
-//serialToParallel unit_serialToParallel();
-
-//uart 
-
-//uart unit_uart();
-
-
+);
 
 
 endmodule 

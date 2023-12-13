@@ -21,7 +21,7 @@ initial begin
  end
 
 
-top unit_top(
+diceTop unit_diceTop(
 
 //input 
 .buttonD4(buttonD4), 
@@ -62,7 +62,7 @@ top unit_top(
 			switchTest = 0;
 
 
-			 #20000;
+			 #20000000;
 
 			 
 		
